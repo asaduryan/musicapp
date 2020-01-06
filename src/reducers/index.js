@@ -1,7 +1,7 @@
-import * as example from './example';
+import * as search from './search';
 
 const reducers = {
-  ...example,
+  ...search,
 }
 
 export default reducers

@@ -1,29 +1,44 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getExamples } from '../../actions'
-
-export class Home extends Component {
+import { getSearch } from '../../actions'
+import Search from './search'
+import ResultsList from './resultsList'
+class Home extends Component {
   componentDidMount() {
-    // this.props.getExamples()
+    // let query = {
+    //   q: "eminem",
+    //   index: 0,
+    //   limit: 10,
+    //   output: "json"
+    // }
+    // this.props.getSearch(query)
   }
-  
+  searchQuery = (q) => {
+        let query = {
+      q,
+      index: 0,
+      limit: 10,
+      output: "json"
+    }
+    this.props.getSearch(query)
+  }
   render() {
-    console.log(getExamples)
     return (
-      <div>
-        Home component 2
-        {()=>console.log(555)}
+      <div className='home'>
+        <Search searchQuery={this.searchQuery}/>
+        {this.props.search && <ResultsList data={this.props.search}/>}
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  
+  search: state.search.data,
+  searchLoading: state.search.loading
 })
 
 const mapDispatchToProps = {
-  getExamples
+  getSearch
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

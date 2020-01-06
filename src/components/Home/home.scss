@@ -1,0 +1,102 @@
+$text-color: #ffffff;
+$main-color-1: #8101f8;
+$back-color-1: #292929;
+$back-color-2: #121212;
+.home {
+  .songBox {
+    display: flex;
+    justify-content: flex-start;
+    border: 3px solid $main-color-1;
+    border-radius: 20px;
+    margin: 10px;
+    background-color: $back-color-2;
+    color: $text-color;
+    .albumCover {
+      padding: 10px;
+    }
+    .artistPic {
+      margin: 10px;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 56px;
+      height: 56px;
+    }
+    .playPauseBtn {
+      height: 60px;
+      width: 60px;
+      color: $text-color;
+      position: relative;
+      border-radius: 50%;
+      cursor: pointer;
+      margin: 10px;
+      &:hover {
+        background-color: $main-color-1;
+      }
+      .playPause {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .progress {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+    }
+    circle {
+      transition: stroke-dashoffset 0.35s;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+    .title {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 10px;
+      .songTitle {
+        font-weight: 600;
+        font-size: 17px;
+      }
+      .albumTitle {
+        font-weight: 300;
+        font-size: 12px;
+      }
+      .artistName {
+        font-weight: 300;
+        font-size: 10px;
+      }
+    }
+  }
+  .search {
+    position: relative;
+    .textSearch {
+      width: 100%;
+      height: 50px;
+      background: #2b303b;
+      border: none;
+      font-size: 10pt;
+      float: left;
+      color: #ffffff;
+      padding-left: 45px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+
+    }
+    .btnSearch {
+      color: #ffffff;
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      font-size: 24px;
+      padding: 15px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 let apiUrl
 
-apiUrl = process.env.REACT_APP_API_URL
+apiUrl = "https://api.deezer.com"
 
 export {
   apiUrl
