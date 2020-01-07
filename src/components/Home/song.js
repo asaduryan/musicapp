@@ -41,7 +41,6 @@ class Song extends Component {
     super(props)
 
     this.state = {
-      status: "pause",
       currentTime: 0,
       duration: 100
     };
@@ -49,11 +48,13 @@ class Song extends Component {
   }
 
   playPause = (key) => {
-    this.setState({
-      status: key
-    });
     switch (key) {
       case "play":
+        let pleying = document.getElementsByClassName("playing");
+        if (pleying[0]) {
+          pleying[0].pause()
+          pleying[0].classList.remove("playing");
+        }
         return this.audio.current.play()
       case "pause":
         return this.audio.current.pause()
@@ -63,7 +64,6 @@ class Song extends Component {
   }
   stop = () => {
     this.setState({
-      status: "pause",
       currentTime: 0
     });
     return this.audio.current.pause()
@@ -71,17 +71,14 @@ class Song extends Component {
   componentDidMount() {
     if (this.audio.current) {
       this.audio.current.ontimeupdate = (event) => {
-      this.setState({
-        currentTime: event.target.currentTime,
-        duration: event.target.duration
-      })
-    }}
+        this.setState({
+          currentTime: event.target.currentTime,
+          duration: event.target.duration
+        })
+      }
+    }
+  }
 
-  }
-  
-  playing() {
-    console.log(88888,this.audio.current)
-  }
   render() {
     const { song } = this.props;
     return (
@@ -97,13 +94,17 @@ class Song extends Component {
               progress={(this.state.currentTime * 100) / this.state.duration}
             />
           </div>
-          {this.state.status === "pause" && <div className='playPause' onClick={() => this.playPause("play")}>
-            <i className="fas fa-play" />
-          </div>}
-          {this.state.status === "play" && <div className='playPause' onClick={() => this.playPause("pause")}>
-            <i className="fas fa-pause" />
-          </div>}
-          <audio controls={false} ref={this.audio} onEnded={ () => this.stop() }  onPlay={this.playing()} >
+          {(!this.audio.current || (this.audio.current && this.audio.current.paused)) &&
+            <div className='playPause' onClick={() => this.playPause("play")}>
+              <i className="fas fa-play" />
+            </div>
+          }
+          {this.audio.current && !this.audio.current.paused &&
+            <div className='playPause' onClick={() => this.playPause("pause")}>
+              <i className="fas fa-pause" />
+            </div>
+          }
+          <audio controls={false} ref={this.audio} onEnded={() => this.stop()} className={`${(!this.audio.current || (this.audio.current && this.audio.current.paused)) ? "pused" : "playing"}`} >
             <source src={song.preview} type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>
