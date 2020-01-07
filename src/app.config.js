@@ -1,6 +1,5 @@
-let apiUrl
-
-apiUrl = "https://api.deezer.com"
+const cors = "https://cors-anywhere.herokuapp.com/" 
+const apiUrl = cors + "https://api.deezer.com"
 
 export {
   apiUrl
